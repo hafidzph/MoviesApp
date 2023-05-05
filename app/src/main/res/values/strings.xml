@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">MoviesApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="masukkan_password">Masukkan Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="masukkan_email">Masukkan Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="daftar_disini"><u>Daftar disini</u></string>
+    <string name="input_username">Masukkan Username</string>
+    <string name="konfirmasi_password">Konfirmasi Password</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="login_disini"><u>Login disini</u></string>
+    <string name="home">Home</string>
+    <string name="update_profile">UPDATE PROFILE</string>
+    <string name="update">Update</string>
+    <string name="masukkan_nama_lengkap">Masukkan Nama Lengkap</string>
+    <string name="masukkan_tanggal_lahir">Masukkan Tanggal Lahir</string>
+    <string name="masukkan_alamat">Masukkan Alamat</string>
+    <string name="logout">Logout</string>
+    <string-array name="month_names">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </string-array>
+</resources>
