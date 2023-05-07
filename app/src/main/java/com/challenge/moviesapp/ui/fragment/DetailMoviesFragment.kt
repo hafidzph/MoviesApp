@@ -29,15 +29,15 @@ class DetailMoviesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = requireArguments().getInt("id")
-        getDetailMovie("id-ID", id)
+        getDetailMovie(id)
         binding?.backButton?.setOnClickListener {
             findNavController().navigate(R.id.action_detailMoviesFragment_to_homeFragment2)
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun getDetailMovie(lang: String, id: Int){
-        detailVM.getMovieDetail(lang, id)
+    private fun getDetailMovie(id: Int){
+        detailVM.getMovieDetail(id)
         detailVM.detailMovie.observe(viewLifecycleOwner) { response ->
             response?.let { movieResponse ->
                 val imgUrl = "https://image.tmdb.org/t/p/w500/${movieResponse.backdropPath}"

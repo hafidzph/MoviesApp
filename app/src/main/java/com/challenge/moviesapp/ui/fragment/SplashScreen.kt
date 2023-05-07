@@ -15,13 +15,14 @@ import com.challenge.moviesapp.R
 import com.challenge.moviesapp.data.local.datastore.LanguagePreferences
 import com.challenge.moviesapp.databinding.FragmentSplashScreenBinding
 import com.challenge.moviesapp.ui.viewmodel.SplashViewModel
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.Locale
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : Fragment() {
-    lateinit var binding: FragmentSplashScreenBinding
+    private var binding: FragmentSplashScreenBinding? = null
     val splashVM: SplashViewModel by viewModels()
     lateinit var langPrefs: LanguagePreferences
     override fun onCreateView(
@@ -29,7 +30,7 @@ class SplashScreen : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSplashScreenBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return binding!!.root
     }
 
     override fun onStart() {
@@ -49,5 +50,10 @@ class SplashScreen : Fragment() {
             resources.configuration.setLocale(locale)
             resources.updateConfiguration(resources.configuration, resources.displayMetrics)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }
