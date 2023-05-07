@@ -113,7 +113,7 @@ class UpdateProfileFragment : Fragment() {
     }
 
     private fun updateProfile(username: String, full_name: String, birth_date: String, address: String){
-        updateVM.updateProfile(username, full_name, birth_date, address)
+        updateVM.updateProfile(username, full_name, birth_date, address, findNavController())
     }
 
     private fun toHome(){
