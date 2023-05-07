@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.marginTop
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import com.challenge.moviesapp.R
 import com.challenge.moviesapp.databinding.FragmentUpdateProfileBinding
 import com.challenge.moviesapp.ui.viewmodel.UpdateProfileViewModel
@@ -28,6 +29,7 @@ class UpdateProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = FragmentUpdateProfileBinding.inflate(inflater, container, false)
         return binding!!.root
     }
@@ -38,6 +40,10 @@ class UpdateProfileFragment : Fragment() {
         binding!!.apply {
             etTglLahir.setOnClickListener {
                 showDatePickerDialog()
+            }
+
+            back.setOnClickListener {
+                toHome()
             }
 
             btnUpdate.setOnClickListener {
@@ -106,7 +112,11 @@ class UpdateProfileFragment : Fragment() {
             .show()
     }
 
-    fun updateProfile(username: String, full_name: String, birth_date: String, address: String){
+    private fun updateProfile(username: String, full_name: String, birth_date: String, address: String){
         updateVM.updateProfile(username, full_name, birth_date, address)
+    }
+
+    private fun toHome(){
+        findNavController().navigate(R.id.action_updateProfileFragment_to_homeFragment2)
     }
 }

@@ -13,12 +13,19 @@
         <action
             android:id="@+id/action_updateProfileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_updateProfileFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
     </fragment>
     <fragment
         android:id="@+id/detailMoviesFragment"
         android:name="com.challenge.moviesapp.ui.fragment.DetailMoviesFragment"
         android:label="fragment_detail_movies"
-        tools:layout="@layout/fragment_detail_movies" />
+        tools:layout="@layout/fragment_detail_movies" >
+        <action
+            android:id="@+id/action_detailMoviesFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment2"
         android:name="com.challenge.moviesapp.ui.fragment.HomeFragment"

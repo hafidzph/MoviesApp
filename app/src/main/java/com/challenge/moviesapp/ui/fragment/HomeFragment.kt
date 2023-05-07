@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -41,12 +42,12 @@ class HomeFragment : Fragment() {
                 showUsername.text = "Hello, ${homeVM.getUsername()}"
             }
         }
-        getAllMovie()
+        getAllMovie("en-EN")
     }
 
-    private fun getAllMovie(){
+    private fun getAllMovie(lang: String){
         binding!!.progressBar.visibility = View.VISIBLE
-        homeVM.getPopularMovie()
+        homeVM.getPopularMovie(lang)
         homeVM.moviePopular.observe(viewLifecycleOwner) { response ->
             response?.let { movieResponse ->
                 binding!!.progressBar.visibility = View.GONE
@@ -58,7 +59,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun toProfile(){
+    private fun toProfile(){
         findNavController().navigate(R.id.action_homeFragment2_to_updateProfileFragment)
     }
 

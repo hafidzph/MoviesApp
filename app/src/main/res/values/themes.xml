@@ -1,7 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MoviesApp" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.MoviesApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
+        <item name="android:fontFamily">@font/rb</item>
         <item name="colorPrimary">@color/blue_appbar</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>

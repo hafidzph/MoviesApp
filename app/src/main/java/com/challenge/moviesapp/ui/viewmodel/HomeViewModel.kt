@@ -21,8 +21,8 @@ class HomeViewModel(val app: Application): AndroidViewModel(app) {
     val moviePopular: LiveData<ResponsePopularMovie> = _moviePopular
     private val userPreferences = UserPreferences(app.applicationContext)
 
-    fun getPopularMovie(){
-        APIConfig.instance.getPopularMovies("d4e032a78d32940d67d6b1e0a21d82ca", 1, "en-EN")
+    fun getPopularMovie(lang: String){
+        APIConfig.instance.getPopularMovies("d4e032a78d32940d67d6b1e0a21d82ca", 1, lang)
             .enqueue(object : Callback<ResponsePopularMovie> {
             override fun onResponse(
                 call: Call<ResponsePopularMovie>,

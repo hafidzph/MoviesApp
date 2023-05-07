@@ -1,7 +1,7 @@
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dialog_title"
-    android:text="Select Date"
+    android:text="@string/select_date"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"

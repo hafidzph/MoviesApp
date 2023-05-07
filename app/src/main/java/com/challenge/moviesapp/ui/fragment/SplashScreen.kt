@@ -12,14 +12,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.challenge.moviesapp.R
+import com.challenge.moviesapp.data.local.datastore.LanguagePreferences
 import com.challenge.moviesapp.databinding.FragmentSplashScreenBinding
 import com.challenge.moviesapp.ui.viewmodel.SplashViewModel
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : Fragment() {
     lateinit var binding: FragmentSplashScreenBinding
     val splashVM: SplashViewModel by viewModels()
+    lateinit var langPrefs: LanguagePreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,5 +37,17 @@ class SplashScreen : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             splashVM.currentUser(findNavController())
         }, 3000)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        langPrefs = LanguagePreferences(requireContext())
+        lifecycleScope.launchWhenStarted {
+            val language = langPrefs.getLanguage(requireContext()).first()
+            val locale = Locale(language)
+            Locale.setDefault(locale)
+            resources.configuration.setLocale(locale)
+            resources.updateConfiguration(resources.configuration, resources.displayMetrics)
+        }
     }
 }
