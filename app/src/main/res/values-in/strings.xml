@@ -37,4 +37,5 @@
         <item>November</item>
         <item>Desember</item>
     </string-array>
+    <string name="delete">HAPUS</string>
 </resources>

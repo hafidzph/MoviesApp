@@ -1,88 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/cvFilm"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvFilm"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:elevation="10dp"
+    app:cardCornerRadius="10dp">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/userScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="50dp"
+        android:layout_margin="5dp"
+        android:layout_gravity="end">
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/white">
+            <TextView
+                android:id="@+id/tvUserScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="50%"
+                android:textSize="11sp"
+                android:layout_centerInParent="true"
+                android:gravity="center"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="5dp"
+        android:background="@drawable/gradient_et">
+
+        <ImageView
+            android:id="@+id/iv_film"
+            android:layout_width="180dp"
+            android:layout_height="220dp"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:cardElevation="5dp"
-            app:cardCornerRadius="10dp"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardPreventCornerOverlap="true">
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="Image Film" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/gradient_et"
-                android:padding="5dp">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:maxWidth="180dp"
+            android:lines="2"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_film" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/CVimgFilm"
-                    android:layout_width="120dp"
-                    android:layout_height="180dp"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/imgFilm"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/profile" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/userScore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="50dp"
-                    android:layout_marginEnd="-10dp"
-                    app:layout_constraintBottom_toBottomOf="@id/CVimgFilm"
-                    app:layout_constraintEnd_toEndOf="@id/CVimgFilm">
-                    <RelativeLayout
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@color/black">
-                        <TextView
-                            android:id="@+id/tvUserScore"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:text="50%"
-                            android:textSize="10sp"
-                            android:layout_centerInParent="true"
-                            android:gravity="center"/>
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvMoviesTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/CVimgFilm"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="10dp"
-                    android:maxWidth="220dp"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:text="Movies Title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvReleaseDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Release Date Movie"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@+id/CVimgFilm"
-                    app:layout_constraintTop_toBottomOf="@+id/tvMoviesTitle"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

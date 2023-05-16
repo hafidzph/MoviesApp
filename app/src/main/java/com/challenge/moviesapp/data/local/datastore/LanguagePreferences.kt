@@ -2,7 +2,6 @@ package com.challenge.moviesapp.data.local.datastore
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +21,7 @@ class LanguagePreferences(private val context: Context) {
         }
     }
 
-    fun getLanguage(context: Context): Flow<String> {
+    fun getLanguage(): Flow<String> {
         return context.counterDataStore.data
             .map { preferences ->
                 preferences[langKey] ?: Locale.getDefault().language

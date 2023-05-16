@@ -36,4 +36,5 @@
         <item>November</item>
         <item>December</item>
     </string-array>
+    <string name="delete">DELETE</string>
 </resources>

@@ -4,6 +4,8 @@ plugins {
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
     id 'com.google.firebase.crashlytics'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -37,6 +39,15 @@ android {
         viewBinding true
         dataBinding true
     }
+
+    lint{
+        disable 'TypographyQuotes'
+        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+
+        checkAllWarnings true
+        abortOnError true
+        lintConfig file("lint.xml")
+    }
 }
 
 dependencies {
@@ -68,11 +79,16 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
+    //Lottie
     implementation "com.airbnb.android:lottie:3.4.0"
 
-    implementation 'androidx.core:core-ktx:1.10.0'
+    //DI
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

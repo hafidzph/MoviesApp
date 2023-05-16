@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/updateProfileFragment"
-        android:name="com.challenge.moviesapp.ui.fragment.UpdateProfileFragment"
+        android:name="com.challenge.moviesapp.view.UpdateProfileFragment"
         android:label="fragment_update_profile"
         tools:layout="@layout/fragment_update_profile" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailMoviesFragment"
-        android:name="com.challenge.moviesapp.ui.fragment.DetailMoviesFragment"
+        android:name="com.challenge.moviesapp.view.DetailMoviesFragment"
         android:label="fragment_detail_movies"
         tools:layout="@layout/fragment_detail_movies" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment2"
-        android:name="com.challenge.moviesapp.ui.fragment.HomeFragment"
+        android:name="com.challenge.moviesapp.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -37,10 +37,13 @@
         <action
             android:id="@+id/action_homeFragment2_to_detailMoviesFragment"
             app:destination="@id/detailMoviesFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_favouriteMovieFragment"
+            app:destination="@id/favouriteMovieFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.challenge.moviesapp.ui.fragment.LoginFragment"
+        android:name="com.challenge.moviesapp.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -52,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.challenge.moviesapp.ui.fragment.RegisterFragment"
+        android:name="com.challenge.moviesapp.view.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -61,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashScreen"
-        android:name="com.challenge.moviesapp.ui.fragment.SplashScreen"
+        android:name="com.challenge.moviesapp.view.SplashScreen"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
@@ -69,6 +72,15 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_splashScreen_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteMovieFragment"
+        android:name="com.challenge.moviesapp.view.FavouriteMovieFragment"
+        android:label="fragment_favourite_movie"
+        tools:layout="@layout/fragment_favourite_movie" >
+        <action
+            android:id="@+id/action_favouriteMovieFragment_to_homeFragment2"
             app:destination="@id/homeFragment2" />
     </fragment>
 </navigation>

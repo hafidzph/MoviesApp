@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,7 +12,7 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|enterAlways">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -24,7 +22,7 @@
                     android:layout_height="400dp"
                     app:layout_constraintTop_toTopOf="parent"
                     android:src="@drawable/gradient"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,7 +53,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_scrollFlags="scroll|enterAlways"
+                app:layout_scrollFlags="enterAlways|scroll"
                 app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -104,5 +102,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/heart"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/blue_appbar"
+        android:contentDescription="Add Fav" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

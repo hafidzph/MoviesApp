@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.challenge.moviesapp.data.local.entity.User
+import com.challenge.moviesapp.model.user.User
 
 @Dao
 interface UserDao {

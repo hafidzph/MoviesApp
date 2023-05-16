@@ -23,6 +23,7 @@
     <string name="bahasa_indonesia">Bahasa Indonesia</string>
     <string name="english">English</string>
     <string name="overview">Ringkasan</string>
+    <string name="delete">DELETE</string>
     <string-array name="month_names">
         <item>Januari</item>
         <item>Februari</item>
@@ -37,4 +38,5 @@
         <item>November</item>
         <item>Desember</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

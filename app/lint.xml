@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="HardcodedText" severity="ignore" />
+    <issue id="GradleDependency" severity="ignore"/>
+    <issue id="AppBundleLocaleChanges" severity="ignore"/>
+    <issue id="InflateParams" severity="ignore"/>
+    <issue id="ObsoleteSdkInt" severity="ignore"/>
+    <issue id="Overdraw" severity="ignore"/>
+    <issue id="UnusedResources" severity="ignore"/>
+    <issue id="MonochromeLauncherIcon" severity="ignore"/>
+    <issue id="IconLocation" severity="ignore"/>
+    <issue id="SyntheticAccessor" severity="ignore"/>
+    <issue id="UnusedIds" severity="ignore"/>
+    <issue id="SelectableText" severity="ignore"/>
+</lint>
