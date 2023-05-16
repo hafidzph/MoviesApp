@@ -34,11 +34,11 @@ class UpdateProfileViewModel @Inject constructor(private val auth: FirebaseAuth,
             val countUsername = userDao.isUsernameExists(username)
             if(countUsername > 0){
                 Toast.makeText(app.applicationContext, "Username already exists, please try another one", Toast.LENGTH_SHORT).show()
-                navController.navigate(R.id.action_updateProfileFragment_to_homeFragment2)
             }else{
                 Toast.makeText(app.applicationContext, "Update profile successful", Toast.LENGTH_SHORT).show()
                 userDao.updateProfile(username, full_name, birth_date, address, userPreferences.getUserId()!!)
                 userPreferences.saveUsername(username)
+                navController.navigate(R.id.action_updateProfileFragment_to_homeFragment2)
             }
         }
 

@@ -82,7 +82,7 @@ class UpdateProfileFragment : Fragment() {
         val monthPicker = NumberPicker(requireContext())
         monthPicker.minValue = 1
         monthPicker.maxValue = 12
-        monthPicker.displayedValues = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+        monthPicker.displayedValues = resources.getStringArray(R.array.month_names)
         monthPicker.value = currentMonth + 1
 
         val yearPicker = NumberPicker(requireContext())
