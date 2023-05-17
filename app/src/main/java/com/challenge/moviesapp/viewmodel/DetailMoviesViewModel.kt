@@ -17,6 +17,7 @@ import com.challenge.moviesapp.model.movie.popular.ResultPopular
 import com.challenge.moviesapp.model.movie.toprated.ResultTopRated
 import com.challenge.moviesapp.model.movie.upcoming.ResultUpcoming
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -30,7 +31,7 @@ class DetailMoviesViewModel @Inject constructor(private val langPrefs: LanguageP
     val detailMovie: LiveData<ResponseMovieDetail> = _detailMovie
 
     fun getMovieDetail(id: Int){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             langPrefs.getLanguage().collect {
                 val langCode = if (it == "id") "id-ID" else "en-EN"
                 try {
@@ -59,7 +60,7 @@ class DetailMoviesViewModel @Inject constructor(private val langPrefs: LanguageP
         )
     }
 
-    fun addToFavourite(result: Any) = viewModelScope.launch {
+    fun addToFavourite(result: Any) = viewModelScope.launch(Dispatchers.IO) {
         when (result) {
             is ResultPopular -> daoInsert(result.posterPath, result.title, result.releaseDate)
             is ResultTopRated -> daoInsert(result.posterPath, result.title, result.releaseDate)

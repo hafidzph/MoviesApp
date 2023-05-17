@@ -12,6 +12,7 @@ import com.challenge.moviesapp.data.local.dao.UserDao
 import com.challenge.moviesapp.data.local.datastore.UserPreferences
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,17 +31,21 @@ class UpdateProfileViewModel @Inject constructor(private val auth: FirebaseAuth,
     }
 
     fun updateProfile(username: String, full_name: String, birth_date: String, address: String, navController: NavController) =
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val countUsername = userDao.isUsernameExists(username)
             if(countUsername > 0){
-                Toast.makeText(app.applicationContext, "Username already exists, please try another one", Toast.LENGTH_SHORT).show()
+                viewModelScope.launch(Dispatchers.Main) {
+                    Toast.makeText(app.applicationContext, "Username already exists, please try another one", Toast.LENGTH_SHORT).show()
+                }
             }else{
-                Toast.makeText(app.applicationContext, "Update profile successful", Toast.LENGTH_SHORT).show()
+                viewModelScope.launch(Dispatchers.Main) {
+                    Toast.makeText(app.applicationContext, "Update profile successful", Toast.LENGTH_SHORT).show()
+                }
                 userDao.updateProfile(username, full_name, birth_date, address, userPreferences.getUserId()!!)
                 userPreferences.saveUsername(username)
                 navController.navigate(R.id.action_updateProfileFragment_to_homeFragment2)
             }
         }
 
-    fun clear() = viewModelScope.launch { userPreferences.clearUserIdAndUsername() }
+    fun clear() = viewModelScope.launch(Dispatchers.IO) { userPreferences.clearUserIdAndUsername() }
 }
