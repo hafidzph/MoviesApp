@@ -8,22 +8,22 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.challenge.moviesapp.R
-import com.challenge.moviesapp.model.movie.popular.ResultPopular
 import com.challenge.moviesapp.databinding.MovieItemBinding
+import com.challenge.moviesapp.model.movie.upcoming.ResultUpcoming
 
-class MovieAdapter(private var listFilm: List<ResultPopular>): RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieUpcomingAdapter(private var listNowPlaying: List<ResultUpcoming>): RecyclerView.Adapter<MovieUpcomingAdapter.ViewHolder>() {
     inner class ViewHolder(private var binding: MovieItemBinding): RecyclerView.ViewHolder(binding.root){
         @SuppressLint("SetTextI18n")
-        fun bind(detailFilm: ResultPopular){
-            val imgUrl = "https://image.tmdb.org/t/p/w500/${detailFilm.posterPath}"
-            val userScore = kotlin.math.round(detailFilm.voteAverage * 10).toInt()
+        fun bind(upcoming: ResultUpcoming){
+            val imgUrl = "https://image.tmdb.org/t/p/w500/${upcoming.posterPath}"
+            val userScore = kotlin.math.round(upcoming.voteAverage * 10).toInt()
             binding.apply {
-                tvTitle.text = detailFilm.title
-                tvDate.text = detailFilm.releaseDate
+                tvTitle.text = upcoming.title
+                tvDate.text = upcoming.releaseDate
                 tvUserScore.text = "$userScore%"
                 cvFilm.setOnClickListener {
                     val bundle = Bundle()
-                    bundle.putParcelable("itemPopular", detailFilm)
+                    bundle.putParcelable("itemUpcoming", upcoming)
                     it.findNavController().navigate(R.id.action_homeFragment2_to_detailMoviesFragment, bundle)
                 }
             }
@@ -37,8 +37,8 @@ class MovieAdapter(private var listFilm: List<ResultPopular>): RecyclerView.Adap
     }
 
     override fun getItemCount(): Int {
-        return listFilm.size
+        return listNowPlaying.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(listFilm[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(listNowPlaying[position])
 }

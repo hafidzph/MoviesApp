@@ -15,7 +15,10 @@ import com.bumptech.glide.Glide
 import com.challenge.moviesapp.BuildConfig
 import com.challenge.moviesapp.R
 import com.challenge.moviesapp.databinding.FragmentDetailMoviesBinding
-import com.challenge.moviesapp.model.movie.popular.Result
+import com.challenge.moviesapp.model.movie.nowplaying.ResultNowPlaying
+import com.challenge.moviesapp.model.movie.popular.ResultPopular
+import com.challenge.moviesapp.model.movie.toprated.ResultTopRated
+import com.challenge.moviesapp.model.movie.upcoming.ResultUpcoming
 import com.challenge.moviesapp.viewmodel.DetailMoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -36,15 +39,29 @@ class DetailMoviesFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val itemFilm = arguments?.getParcelable<Result>("item_film")
-        getDetailMovie(itemFilm!!.id)
+        val itemPopular = arguments?.getParcelable<ResultPopular>("itemPopular")
+        val itemNowPlaying = arguments?.getParcelable<ResultNowPlaying>("itemNowPlaying")
+        val itemTopRated = arguments?.getParcelable<ResultTopRated>("itemTopRated")
+        val itemUpcoming = arguments?.getParcelable<ResultUpcoming>("itemUpcoming")
+
+        when{
+            itemPopular != null -> getDetailMovie(itemPopular.id)
+            itemNowPlaying != null -> getDetailMovie(itemNowPlaying.id)
+            itemTopRated != null -> getDetailMovie(itemTopRated.id)
+            itemUpcoming != null -> getDetailMovie(itemUpcoming.id)
+        }
+
         binding?.apply {
             backButton.setOnClickListener {
                 toHome()
             }
 
             fabAddFav.setOnClickListener{
-                addToFav(itemFilm)
+                (itemPopular ?: itemNowPlaying ?: itemTopRated ?: itemUpcoming)?.let {
+                    addToFavorites(
+                        it
+                    )
+                }
             }
         }
     }
@@ -53,20 +70,40 @@ class DetailMoviesFragment: Fragment() {
         findNavController().navigate(R.id.action_detailMoviesFragment_to_homeFragment2)
     }
 
-    private fun addToFav(result: Result){
+    private fun addToFavorites(item: Any) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                if(detailVM.existingMovie(result.title)){
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        Toast.makeText(requireContext(), "The movie is already in favorites", Toast.LENGTH_SHORT).show()
-                    }
-                }else{
-                    detailVM.addToFavourite(result)
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        Toast.makeText(requireContext(), "Successfully added to favorites", Toast.LENGTH_SHORT).show()
+                when (item) {
+                    is ResultPopular, is ResultTopRated, is ResultNowPlaying, is ResultUpcoming -> {
+                        val title = when (item) {
+                            is ResultPopular -> item.title
+                            is ResultTopRated -> item.title
+                            is ResultNowPlaying -> item.title
+                            is ResultUpcoming -> item.title
+                            else -> ""
+                        }
+
+                        if (detailVM.existingMovie(title)) {
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "The movie is already in favorites",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        } else {
+                            detailVM.addToFavourite(item)
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Successfully added to favorites",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
                     }
                 }
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 if (BuildConfig.DEBUG) Log.d("Error adding favorites", e.message!!)
             }
         }

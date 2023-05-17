@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.challenge.moviesapp.BuildConfig
 import com.challenge.moviesapp.data.local.dao.FavouriteDao
 import com.challenge.moviesapp.data.local.datastore.UserPreferences
 import com.challenge.moviesapp.model.movie.favourite.FavouriteMovie
@@ -23,7 +24,7 @@ class FavouriteViewModel @Inject constructor(private val userPreferences: UserPr
         try {
             _favMovie.postValue(favDao.getAllFavMovie(userPreferences.getUserId()!!))
         } catch (e: Exception){
-            Log.d("Error fav", "Error post fav movie")
+            if (BuildConfig.DEBUG) Log.d("Error fav", "Error post fav movie")
         }
     }
 

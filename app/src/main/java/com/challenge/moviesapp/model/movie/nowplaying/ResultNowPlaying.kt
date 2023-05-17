@@ -1,11 +1,12 @@
-package com.challenge.moviesapp.model.movie.popular
+package com.challenge.moviesapp.model.movie.nowplaying
+
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Result(
+data class ResultNowPlaying(
     @SerializedName("id")
     val id: Int,
     @SerializedName("poster_path")

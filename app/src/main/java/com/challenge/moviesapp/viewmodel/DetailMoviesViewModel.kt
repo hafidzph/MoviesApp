@@ -12,7 +12,10 @@ import com.challenge.moviesapp.data.local.datastore.UserPreferences
 import com.challenge.moviesapp.data.remote.service.APIMovieService
 import com.challenge.moviesapp.model.movie.detail.ResponseMovieDetail
 import com.challenge.moviesapp.model.movie.favourite.FavouriteMovie
-import com.challenge.moviesapp.model.movie.popular.Result
+import com.challenge.moviesapp.model.movie.nowplaying.ResultNowPlaying
+import com.challenge.moviesapp.model.movie.popular.ResultPopular
+import com.challenge.moviesapp.model.movie.toprated.ResultTopRated
+import com.challenge.moviesapp.model.movie.upcoming.ResultUpcoming
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -34,7 +37,7 @@ class DetailMoviesViewModel @Inject constructor(private val langPrefs: LanguageP
                     val response = movieService.getDetailMovie(id, "d4e032a78d32940d67d6b1e0a21d82ca", langCode)
                     _detailMovie.postValue(response)
                 }catch (e: Exception){
-                    if(BuildConfig.DEBUG) Log.d("Error Detail", e.message!!)
+                    if (BuildConfig.DEBUG) Log.d("Error Detail", e.message!!)
                 }
             }
         }
@@ -45,10 +48,24 @@ class DetailMoviesViewModel @Inject constructor(private val langPrefs: LanguageP
             favDao.getFavouriteMovieByTitleAndUserId(title, userPreferences.getUserId()!!) > 0
         }
 
-    fun addToFavourite(result: Result) = viewModelScope.launch {
-        favDao.insert(
-            FavouriteMovie(img = result.posterPath, title = result.title,
-                date = result.releaseDate, userId = userPreferences.getUserId()!!)
+    private suspend fun daoInsert(img: String, title: String, date: String) {
+        return favDao.insert(
+            FavouriteMovie(
+                img = img,
+                title = title,
+                date = date,
+                userId = userPreferences.getUserId()!!
+            )
         )
     }
+
+    fun addToFavourite(result: Any) = viewModelScope.launch {
+        when (result) {
+            is ResultPopular -> daoInsert(result.posterPath, result.title, result.releaseDate)
+            is ResultTopRated -> daoInsert(result.posterPath, result.title, result.releaseDate)
+            is ResultNowPlaying -> daoInsert(result.posterPath, result.title, result.releaseDate)
+            is ResultUpcoming -> daoInsert(result.posterPath, result.title, result.releaseDate)
+        }
+    }
+
 }

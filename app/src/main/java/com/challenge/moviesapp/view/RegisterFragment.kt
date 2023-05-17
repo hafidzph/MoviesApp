@@ -54,7 +54,7 @@ class RegisterFragment : Fragment() {
                     tilUsername.error = null
                     tilEmail.error = null
                     tilPass.error = null
-                    lifecycleScope.launch {
+                    lifecycleScope.launch(Dispatchers.Main) {
                         val isExist = withContext(Dispatchers.IO){ registerVM.checkIfUserExists(username, email) }
                         if (password != confirmPassword) {
                             tilPassConf.error = "Password tidak sesuai"
@@ -63,20 +63,28 @@ class RegisterFragment : Fragment() {
                             if (isExist) {
                                 Toast.makeText(requireContext(), "Username atau email sudah terdaftar", Toast.LENGTH_LONG).show()
                             } else {
-                                withContext(Dispatchers.IO) {
-                                    registerVM.insertUser(
-                                        User(
-                                            username = username,
-                                            email = email,
-                                            password = password,
-                                            full_name = "",
-                                            birth_date = "",
-                                            address = ""
+                                if(isValidEmail(email)) {
+                                    withContext(Dispatchers.IO) {
+                                        registerVM.insertUser(
+                                            User(
+                                                username = username,
+                                                email = email,
+                                                password = password,
+                                                full_name = "",
+                                                birth_date = "",
+                                                address = ""
+                                            )
                                         )
-                                    )
-                                    registerVM.signUpUser(email, password, findNavController())
+                                        registerVM.signUpUser(email, password, findNavController())
+                                    }
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Akun berhasil didaftarkan",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }else{
+                                    tilEmail.error = "Email tidak valid"
                                 }
-                                Toast.makeText(requireContext(), "Akun berhasil didaftarkan", Toast.LENGTH_LONG).show()
                             }
                         }
                     }
@@ -87,6 +95,11 @@ class RegisterFragment : Fragment() {
 
     private fun toLogin(){
         findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$"
+        return email.matches(emailRegex.toRegex())
     }
 
     override fun onDestroy() {
