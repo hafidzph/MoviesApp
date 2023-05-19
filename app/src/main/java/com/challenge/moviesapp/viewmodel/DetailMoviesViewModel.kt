@@ -15,6 +15,9 @@ import com.challenge.moviesapp.model.movie.favourite.FavouriteMovie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,6 +34,7 @@ class DetailMoviesViewModel @Inject constructor(private val langPrefs: LanguageP
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean> = _isFavorite
 
+    private val currentDateTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
 
     fun getMovieDetail(id: Int){
         viewModelScope.launch(Dispatchers.IO) {
@@ -39,9 +43,9 @@ class DetailMoviesViewModel @Inject constructor(private val langPrefs: LanguageP
                 try {
                     val response = movieService.getDetailMovie(id, "d4e032a78d32940d67d6b1e0a21d82ca", langCode)
                     _detailMovie.postValue(response)
-                    _favMovie.postValue(FavouriteMovie(id, response.posterPath, response.title, response.releaseDate, userPreferences.getUserId()!!))
+                    _favMovie.postValue(FavouriteMovie(id, response.posterPath, response.title, response.releaseDate, currentDateTime, userPreferences.getUserId()!!))
                 }catch (e: Exception){
-                    Log.d("Error Detail", e.message ?: "Unknown error occurred")
+                    if(BuildConfig.DEBUG) Log.d("Error Detail", e.message ?: "Unknown error occurred")
                 }
             }
         }

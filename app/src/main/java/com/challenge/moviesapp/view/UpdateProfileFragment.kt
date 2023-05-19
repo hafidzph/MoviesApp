@@ -70,7 +70,7 @@ class UpdateProfileFragment : Fragment() {
                 if(username.isNotEmpty() && fullName.isNotEmpty() && birthDate.isNotEmpty() && address.isNotEmpty()){
                     updateProfile(username, fullName, birthDate, address)
                 }else{
-                    Toast.makeText(requireContext(), "Field must be filled", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), R.string.msg_field, Toast.LENGTH_SHORT).show()
                 }
             }
 

@@ -47,10 +47,10 @@ class RegisterFragment : Fragment() {
                 val confirmPassword = etPassConf.text.toString()
 
                 if(password.isEmpty() || confirmPassword.isEmpty() || email.isEmpty() || username.isEmpty()){
-                    tilUsername.error = if (username.isEmpty()) "Username tidak boleh kosong" else null
-                    tilEmail.error = if (email.isEmpty()) "Email tidak boleh kosong" else null
-                    tilPass.error = if (password.isEmpty()) "Password tidak boleh kosong" else null
-                    tilPassConf.error = if (confirmPassword.isEmpty()) "Konfirmasi Password tidak boleh kosong" else null
+                    tilUsername.error = if (username.isEmpty()) context?.getString(R.string.msg_username_empty) else null
+                    tilEmail.error = if (email.isEmpty()) context?.getString(R.string.msg_email_empty) else null
+                    tilPass.error = if (password.isEmpty()) context?.getString(R.string.msg_password_empty) else null
+                    tilPassConf.error = if (confirmPassword.isEmpty()) context?.getString(R.string.msg_cp_empty) else null
                 }else {
                     tilUsername.error = null
                     tilEmail.error = null
@@ -58,11 +58,11 @@ class RegisterFragment : Fragment() {
                     lifecycleScope.launch(Dispatchers.Main) {
                         val isExist = withContext(Dispatchers.IO){ registerVM.checkIfUserExists(username, email) }
                         if (password != confirmPassword) {
-                            tilPassConf.error = "Password tidak sesuai"
+                            tilPassConf.error = context?.getString(R.string.msg_matchpsw)
                         } else {
                             tilPassConf.error = null
                             if (isExist) {
-                                Toast.makeText(requireContext(), "Username atau email sudah terdaftar", Toast.LENGTH_LONG).show()
+                                Toast.makeText(requireContext(), context?.getString(R.string.msg_existing), Toast.LENGTH_LONG).show()
                             } else {
                                 if(isValidEmail(email)) {
                                     withContext(Dispatchers.IO) {
@@ -80,11 +80,11 @@ class RegisterFragment : Fragment() {
                                     }
                                     Toast.makeText(
                                         requireContext(),
-                                        "Akun berhasil didaftarkan",
+                                        R.string.msg_success_register,
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }else{
-                                    tilEmail.error = "Email tidak valid"
+                                    tilEmail.error = context?.getString(R.string.msg_email_invalid)
                                 }
                             }
                         }

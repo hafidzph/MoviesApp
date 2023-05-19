@@ -12,7 +12,7 @@ interface FavouriteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(favMovie: FavouriteMovie)
 
-    @Query("SELECT * FROM favourite WHERE userId = :userId ORDER BY id DESC")
+    @Query("SELECT * FROM favourite WHERE userId = :userId ORDER BY date_added DESC")
     fun getAllFavMovie(userId: Int): List<FavouriteMovie>
 
     @Query("DELETE FROM favourite WHERE id = :id")

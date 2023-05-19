@@ -38,4 +38,17 @@
         <item>Desember</item>
     </string-array>
     <string name="delete">HAPUS</string>
+    <string name="msg_fav_delete">Film berhasil dihapus dari daftar favorit</string>
+    <string name="msg_fav_input">Berhasil menambahkan film ke daftar favorit</string>
+    <string name="hello">Halo</string>
+    <string name="msg_login_invalid">Email dan Kata Sandi tidak valid</string>
+    <string name="msg_email_empty">Email tidak boleh kosong</string>
+    <string name="msg_username_empty">Username tidak boleh kosong</string>
+    <string name="msg_password_empty">Kata sandi tidak boleh kosong</string>
+    <string name="msg_cp_empty">Konfirmasi Password tidak boleh kosong</string>
+    <string name="msg_matchpsw">Password tidak sesuai</string>
+    <string name="msg_existing">Username atau email sudah terdaftar</string>
+    <string name="msg_success_register">Akun berhasil didaftarkan</string>
+    <string name="msg_email_invalid">Email tidak valid</string>
+    <string name="msg_field">Kolom harus diisi</string>
 </resources>

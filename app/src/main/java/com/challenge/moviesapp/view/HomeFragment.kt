@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
             }
 
             lifecycleScope.launch(Dispatchers.Main) {
-                showUsername.text = "Hello, ${homeVM.getUsername()}"
+                showUsername.text = "${context?.getString(R.string.hello)}, ${homeVM.getUsername()}"
             }
 
             fav.setOnClickListener{

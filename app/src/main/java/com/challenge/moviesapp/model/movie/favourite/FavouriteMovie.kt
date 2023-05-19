@@ -24,5 +24,6 @@ data class FavouriteMovie (
     @ColumnInfo(name = "imgLink") var img: String,
     @ColumnInfo(name = "title") var title: String,
     @ColumnInfo(name = "date") var date: String,
+    @ColumnInfo(name = "date_added") var date_added: String,
     @ColumnInfo(name = "userId") var userId: Int
     ): Parcelable

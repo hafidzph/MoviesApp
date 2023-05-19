@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
             loginVM.saveUserIdAndUsername(user.id, user.username)
         }else{
             lifecycleScope.launch(Dispatchers.Main){
-                Toast.makeText(context, "Email and Password is not invalid", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.msg_login_invalid, Toast.LENGTH_SHORT).show()
             }
         }
     }

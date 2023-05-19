@@ -55,10 +55,10 @@ class DetailMoviesFragment: Fragment() {
         detailVM.favMovie.observe(viewLifecycleOwner) {
             if (isFav == true) {
                 detailVM.removeFromFavorites(it)
-                Toast.makeText(context, "Movie successfully removed from favorites list", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.msg_fav_delete, Toast.LENGTH_SHORT).show()
             } else {
                 detailVM.addToFavorites(it)
-                Toast.makeText(context, "Successfully adding movie to favorites list", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.msg_fav_input, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -80,7 +80,7 @@ class DetailMoviesFragment: Fragment() {
     }
 
     private fun toHome(){
-        findNavController().navigate(R.id.action_detailMoviesFragment_to_homeFragment2)
+        findNavController().navigateUp()
     }
 
     @SuppressLint("SetTextI18n")
