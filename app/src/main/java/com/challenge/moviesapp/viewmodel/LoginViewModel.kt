@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.challenge.moviesapp.R
+import com.challenge.moviesapp.data.local.dao.FavouriteDao
 import com.challenge.moviesapp.data.local.dao.UserDao
 import com.challenge.moviesapp.data.local.datastore.LanguagePreferences
 import com.challenge.moviesapp.data.local.datastore.UserPreferences
@@ -20,7 +21,8 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(private val auth: FirebaseAuth,
                                         private val userDao: UserDao,
                                         private val userPreferences: UserPreferences,
-                                        private val languagePreferences: LanguagePreferences): ViewModel() {
+                                        private val languagePreferences: LanguagePreferences,
+                                        private val favouriteDao: FavouriteDao): ViewModel() {
     fun saveUserIdAndUsername(id: Int, username: String) = viewModelScope.launch(Dispatchers.IO) {
         userPreferences.saveId(id)
         userPreferences.saveUsername(username)
@@ -52,4 +54,6 @@ class LoginViewModel @Inject constructor(private val auth: FirebaseAuth,
         }
     }
 
+    fun deleteUser() = viewModelScope.launch { userDao.deleteUser() }
+    fun deleteFav() = viewModelScope.launch { favouriteDao.deleteMovie() }
 }

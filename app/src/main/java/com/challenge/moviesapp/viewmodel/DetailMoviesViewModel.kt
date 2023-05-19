@@ -41,7 +41,7 @@ class DetailMoviesViewModel @Inject constructor(private val langPrefs: LanguageP
                     _detailMovie.postValue(response)
                     _favMovie.postValue(FavouriteMovie(id, response.posterPath, response.title, response.releaseDate, userPreferences.getUserId()!!))
                 }catch (e: Exception){
-                    if (BuildConfig.DEBUG) Log.d("Error Detail", e.message!!)
+                    Log.d("Error Detail", e.message ?: "Unknown error occurred")
                 }
             }
         }
@@ -49,7 +49,7 @@ class DetailMoviesViewModel @Inject constructor(private val langPrefs: LanguageP
 
     fun checkFavoriteStatus(movie: FavouriteMovie) {
         viewModelScope.launch {
-            val isFav = favDao.getFavoriteMovieCount(movie.id)
+            val isFav = favDao.getFavoriteMovieCount(movie.id, userPreferences.getUserId()!!)
             _isFavorite.value = isFav > 0
         }
     }

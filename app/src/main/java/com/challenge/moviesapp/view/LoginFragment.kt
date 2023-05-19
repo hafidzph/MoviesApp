@@ -38,11 +38,13 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
             btnLogin.setOnClickListener {
+//                loginVM.deleteUser()
+//                loginVM.deleteFav()
                 val email = etEmail.text.toString()
                 val password = etPass.text.toString()
                 lifecycleScope.launch(Dispatchers.IO) {
                     val getUser = loginVM.getUserByEmailAndPassword(email, password)
-                    authLogin(email, password, getUser, FirebaseAuth.getInstance().currentUser)
+                    authLogin(email, password, getUser)
                 }
             }
 
@@ -69,8 +71,8 @@ class LoginFragment : Fragment() {
         findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
     }
 
-    private fun authLogin(email: String, password: String, user: User?, firebaseUser: FirebaseUser?){
-        if(email.isNotEmpty() && password.isNotEmpty() && user != null && firebaseUser != null){
+    private fun authLogin(email: String, password: String, user: User?){
+        if(email.isNotEmpty() && password.isNotEmpty() && user != null){
             loginVM.signIn(email, password, findNavController())
             loginVM.saveUserIdAndUsername(user.id, user.username)
         }else{

@@ -1,6 +1,7 @@
 package com.challenge.moviesapp.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -17,6 +18,9 @@ interface FavouriteDao {
     @Query("DELETE FROM favourite WHERE id = :id")
     suspend fun delete(id: Int): Int
 
-    @Query("SELECT COUNT(*) FROM favourite WHERE id = :movieId")
-    suspend fun getFavoriteMovieCount(movieId: Int): Int
+    @Query("SELECT COUNT(*) FROM favourite WHERE id = :movieId AND userId = :userId")
+    suspend fun getFavoriteMovieCount(movieId: Int , userId: Int): Int
+
+    @Query("DELETE FROM favourite")
+    suspend fun deleteMovie()
 }
