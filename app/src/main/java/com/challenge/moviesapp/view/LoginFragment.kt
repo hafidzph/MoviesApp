@@ -38,8 +38,6 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
             btnLogin.setOnClickListener {
-//                loginVM.deleteUser()
-//                loginVM.deleteFav()
                 val email = etEmail.text.toString()
                 val password = etPass.text.toString()
                 lifecycleScope.launch(Dispatchers.IO) {

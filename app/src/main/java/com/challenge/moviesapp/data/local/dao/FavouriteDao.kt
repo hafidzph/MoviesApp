@@ -20,7 +20,4 @@ interface FavouriteDao {
 
     @Query("SELECT COUNT(*) FROM favourite WHERE id = :movieId AND userId = :userId")
     suspend fun getFavoriteMovieCount(movieId: Int , userId: Int): Int
-
-    @Query("DELETE FROM favourite")
-    suspend fun deleteMovie()
 }

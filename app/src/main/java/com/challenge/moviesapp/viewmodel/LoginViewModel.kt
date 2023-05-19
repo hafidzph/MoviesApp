@@ -53,7 +53,4 @@ class LoginViewModel @Inject constructor(private val auth: FirebaseAuth,
             userDao.getUserByEmailAndPassword(email, password)
         }
     }
-
-    fun deleteUser() = viewModelScope.launch { userDao.deleteUser() }
-    fun deleteFav() = viewModelScope.launch { favouriteDao.deleteMovie() }
 }
