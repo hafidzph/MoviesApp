@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
+@Suppress("unused", "RedundantSuppression")
 class RegisterFragment : Fragment() {
     private var binding: FragmentRegisterBinding? = null
     private val registerVM: RegisterViewModel by viewModels()

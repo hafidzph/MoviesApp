@@ -82,5 +82,8 @@
         <action
             android:id="@+id/action_favouriteMovieFragment_to_homeFragment2"
             app:destination="@id/homeFragment2" />
+        <action
+            android:id="@+id/action_favouriteMovieFragment_to_detailMoviesFragment"
+            app:destination="@id/detailMoviesFragment" />
     </fragment>
 </navigation>

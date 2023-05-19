@@ -13,12 +13,15 @@ import com.challenge.moviesapp.R
 import com.challenge.moviesapp.databinding.FragmentLoginBinding
 import com.challenge.moviesapp.model.user.User
 import com.challenge.moviesapp.viewmodel.LoginViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
 
 @AndroidEntryPoint
+@Suppress("unused", "RedundantSuppression")
 class LoginFragment : Fragment() {
     private var binding: FragmentLoginBinding? = null
     private val loginVM: LoginViewModel by viewModels()
@@ -39,7 +42,7 @@ class LoginFragment : Fragment() {
                 val password = etPass.text.toString()
                 lifecycleScope.launch(Dispatchers.IO) {
                     val getUser = loginVM.getUserByEmailAndPassword(email, password)
-                    authLogin(email, password, getUser)
+                    authLogin(email, password, getUser, FirebaseAuth.getInstance().currentUser)
                 }
             }
 
@@ -66,8 +69,8 @@ class LoginFragment : Fragment() {
         findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
     }
 
-    private fun authLogin(email: String, password: String, user: User?){
-        if(email.isNotEmpty() && password.isNotEmpty() && user != null){
+    private fun authLogin(email: String, password: String, user: User?, firebaseUser: FirebaseUser?){
+        if(email.isNotEmpty() && password.isNotEmpty() && user != null && firebaseUser != null){
             loginVM.signIn(email, password, findNavController())
             loginVM.saveUserIdAndUsername(user.id, user.username)
         }else{

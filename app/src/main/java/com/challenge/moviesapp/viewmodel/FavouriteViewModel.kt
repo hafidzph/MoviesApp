@@ -28,10 +28,10 @@ class FavouriteViewModel @Inject constructor(private val userPreferences: UserPr
         }
     }
 
-    fun deleteFav(favMovie: FavouriteMovie) = viewModelScope.launch(Dispatchers.IO) {
-        favDao.delete(favMovie.id)
-        val currentList = _favMovie.value.orEmpty().toMutableList()
-        currentList.remove(favMovie)
-        _favMovie.postValue(currentList)
-    }
+//    fun deleteFav(favMovie: FavouriteMovie) = viewModelScope.launch(Dispatchers.IO) {
+//        favDao.delete(favMovie.id)
+//        val currentList = _favMovie.value.orEmpty().toMutableList()
+//        currentList.remove(favMovie)
+//        _favMovie.postValue(currentList)
+//    }
 }

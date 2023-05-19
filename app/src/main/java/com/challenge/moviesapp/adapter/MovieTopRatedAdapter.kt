@@ -23,7 +23,7 @@ class MovieTopRatedAdapter(private var listNowPlaying: List<ResultTopRated>): Re
                 tvUserScore.text = "$userScore%"
                 cvFilm.setOnClickListener {
                     val bundle = Bundle()
-                    bundle.putParcelable("itemTopRated", topRated)
+                    bundle.putInt("id", topRated.id)
                     it.findNavController().navigate(R.id.action_homeFragment2_to_detailMoviesFragment, bundle)
                 }
             }

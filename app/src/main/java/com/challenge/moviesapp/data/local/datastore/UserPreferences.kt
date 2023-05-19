@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 
+@Suppress("unused", "RedundantSuppression")
 class UserPreferences(private val context: Context) {
     companion object {
         private val Context.counterDataStore by preferencesDataStore(

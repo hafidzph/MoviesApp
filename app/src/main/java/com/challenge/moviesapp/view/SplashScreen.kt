@@ -20,6 +20,7 @@ import java.util.Locale
 
 @AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
+@Suppress("unused", "RedundantSuppression")
 class SplashScreen : Fragment() {
     private var binding: FragmentSplashScreenBinding? = null
     private val splashVM: SplashViewModel by viewModels()

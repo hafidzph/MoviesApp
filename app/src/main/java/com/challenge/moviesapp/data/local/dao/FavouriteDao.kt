@@ -11,12 +11,12 @@ interface FavouriteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(favMovie: FavouriteMovie)
 
-    @Query("SELECT * FROM favourite WHERE userId = :userId")
+    @Query("SELECT * FROM favourite WHERE userId = :userId ORDER BY id DESC")
     fun getAllFavMovie(userId: Int): List<FavouriteMovie>
 
     @Query("DELETE FROM favourite WHERE id = :id")
     suspend fun delete(id: Int): Int
 
-    @Query("SELECT COUNT(*) FROM favourite WHERE title = :title AND userId = :userId")
-    suspend fun getFavouriteMovieByTitleAndUserId(title: String, userId: Int): Int
+    @Query("SELECT COUNT(*) FROM favourite WHERE id = :movieId")
+    suspend fun getFavoriteMovieCount(movieId: Int): Int
 }

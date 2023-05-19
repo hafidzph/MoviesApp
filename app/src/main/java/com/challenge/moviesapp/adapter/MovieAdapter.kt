@@ -23,7 +23,7 @@ class MovieAdapter(private var listFilm: List<ResultPopular>): RecyclerView.Adap
                 tvUserScore.text = "$userScore%"
                 cvFilm.setOnClickListener {
                     val bundle = Bundle()
-                    bundle.putParcelable("itemPopular", detailFilm)
+                    bundle.putInt("id", detailFilm.id)
                     it.findNavController().navigate(R.id.action_homeFragment2_to_detailMoviesFragment, bundle)
                 }
             }

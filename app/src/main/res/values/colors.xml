@@ -7,7 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="blue_10acfc">#10acfc</color>
+    <color name="blue_all">#10acfc</color>
     <color name="blue_appbar">#95d9fc</color>
     <color name="link_blue">#0000EE</color>
     <color name="grey_text">#4d4f4e</color>
@@ -15,4 +15,5 @@
     <color name="trans">#27272799</color>
     <color name="color_movie_title">#d1cdcd</color>
     <color name="black_trans">#272727</color>
+    <color name="red">#f01620</color>
 </resources>

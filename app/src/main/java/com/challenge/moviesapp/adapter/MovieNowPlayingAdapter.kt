@@ -23,7 +23,7 @@ class MovieNowPlayingAdapter(private var listNowPlaying: List<ResultNowPlaying>)
                 tvUserScore.text = "$userScore%"
                 cvFilm.setOnClickListener {
                     val bundle = Bundle()
-                    bundle.putParcelable("itemNowPlaying", nowPlaying)
+                    bundle.putInt("id", nowPlaying.id)
                     it.findNavController().navigate(R.id.action_homeFragment2_to_detailMoviesFragment, bundle)
                 }
             }

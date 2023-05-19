@@ -11,14 +11,19 @@ import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.challenge.moviesapp.R
 import com.challenge.moviesapp.databinding.FragmentUpdateProfileBinding
+import com.challenge.moviesapp.model.user.User
 import com.challenge.moviesapp.viewmodel.UpdateProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 @AndroidEntryPoint
+@Suppress("unused", "RedundantSuppression")
 class UpdateProfileFragment : Fragment() {
     private var binding: FragmentUpdateProfileBinding? = null
     private val updateVM: UpdateProfileViewModel by viewModels()
@@ -42,6 +47,18 @@ class UpdateProfileFragment : Fragment() {
 
             back.setOnClickListener {
                 toHome()
+            }
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                val user: User? = updateVM.getUser()
+                lifecycleScope.launch(Dispatchers.Main) {
+                    if (user != null) {
+                        etNama.setText(user.full_name)
+                        etTglLahir.setText(user.birth_date)
+                        etAlamat.setText(user.address)
+                        etUsername.setText(updateVM.getUsername())
+                    }
+                }
             }
 
             btnUpdate.setOnClickListener {

@@ -43,9 +43,15 @@ class UpdateProfileViewModel @Inject constructor(private val auth: FirebaseAuth,
                 }
                 userDao.updateProfile(username, full_name, birth_date, address, userPreferences.getUserId()!!)
                 userPreferences.saveUsername(username)
-                navController.navigate(R.id.action_updateProfileFragment_to_homeFragment2)
+                viewModelScope.launch(Dispatchers.Main) {
+                    navController.navigate(R.id.action_updateProfileFragment_to_homeFragment2)
+                }
             }
         }
+
+    suspend fun getUser() = userDao.getUser(userPreferences.getUserId()!!)
+
+    suspend fun getUsername(): String? = userPreferences.getUsername()
 
     fun clear() = viewModelScope.launch(Dispatchers.IO) { userPreferences.clearUserIdAndUsername() }
 }

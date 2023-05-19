@@ -2,32 +2,27 @@ package com.challenge.moviesapp.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.challenge.moviesapp.BuildConfig
 import com.challenge.moviesapp.R
 import com.challenge.moviesapp.databinding.FragmentDetailMoviesBinding
-import com.challenge.moviesapp.model.movie.nowplaying.ResultNowPlaying
-import com.challenge.moviesapp.model.movie.popular.ResultPopular
-import com.challenge.moviesapp.model.movie.toprated.ResultTopRated
-import com.challenge.moviesapp.model.movie.upcoming.ResultUpcoming
+import com.challenge.moviesapp.model.movie.favourite.FavouriteMovie
 import com.challenge.moviesapp.viewmodel.DetailMoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
+@Suppress("unused", "RedundantSuppression")
 class DetailMoviesFragment: Fragment() {
     private var binding: FragmentDetailMoviesBinding? = null
     private val detailVM: DetailMoviesViewModel by viewModels()
+    private lateinit var favMovie: FavouriteMovie
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,29 +34,47 @@ class DetailMoviesFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val itemPopular = arguments?.getParcelable<ResultPopular>("itemPopular")
-        val itemNowPlaying = arguments?.getParcelable<ResultNowPlaying>("itemNowPlaying")
-        val itemTopRated = arguments?.getParcelable<ResultTopRated>("itemTopRated")
-        val itemUpcoming = arguments?.getParcelable<ResultUpcoming>("itemUpcoming")
-
-        when{
-            itemPopular != null -> getDetailMovie(itemPopular.id)
-            itemNowPlaying != null -> getDetailMovie(itemNowPlaying.id)
-            itemTopRated != null -> getDetailMovie(itemTopRated.id)
-            itemUpcoming != null -> getDetailMovie(itemUpcoming.id)
-        }
+        val getMovieId = arguments?.getInt("id")!!
+        getDetailMovie(getMovieId)
+        checkIsFav()
+        checkFavStatus()
 
         binding?.apply {
             backButton.setOnClickListener {
                 toHome()
             }
 
-            fabAddFav.setOnClickListener{
-                (itemPopular ?: itemNowPlaying ?: itemTopRated ?: itemUpcoming)?.let {
-                    addToFavorites(
-                        it
-                    )
-                }
+            fabAddFav.setOnClickListener {
+                val isFav = detailVM.isFavorite.value
+                addToFav(isFav)
+            }
+        }
+    }
+
+    private fun addToFav(isFav: Boolean?){
+        detailVM.favMovie.observe(viewLifecycleOwner) {
+            if (isFav == true) {
+                detailVM.removeFromFavorites(it)
+                Toast.makeText(context, "Movie successfully removed from favorites list", Toast.LENGTH_SHORT).show()
+            } else {
+                detailVM.addToFavorites(it)
+                Toast.makeText(context, "Successfully adding movie to favorites list", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun checkFavStatus(){
+        detailVM.favMovie.observe(viewLifecycleOwner){
+            detailVM.checkFavoriteStatus(it)
+        }
+    }
+
+    private fun checkIsFav(){
+        detailVM.isFavorite.observe(viewLifecycleOwner) { isFav ->
+            if (isFav) {
+                binding?.fabAddFav?.setImageResource(R.drawable.baseline_favorite_24)
+            } else {
+                binding?.fabAddFav?.setImageResource(R.drawable.baseline_favorite_border_24)
             }
         }
     }
@@ -69,46 +82,6 @@ class DetailMoviesFragment: Fragment() {
     private fun toHome(){
         findNavController().navigate(R.id.action_detailMoviesFragment_to_homeFragment2)
     }
-
-    private fun addToFavorites(item: Any) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                when (item) {
-                    is ResultPopular, is ResultTopRated, is ResultNowPlaying, is ResultUpcoming -> {
-                        val title = when (item) {
-                            is ResultPopular -> item.title
-                            is ResultTopRated -> item.title
-                            is ResultNowPlaying -> item.title
-                            is ResultUpcoming -> item.title
-                            else -> ""
-                        }
-
-                        if (detailVM.existingMovie(title)) {
-                            lifecycleScope.launch(Dispatchers.Main) {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "The movie is already in favorites",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        } else {
-                            detailVM.addToFavourite(item)
-                            lifecycleScope.launch(Dispatchers.Main) {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Successfully added to favorites",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-                    }
-                }
-            } catch (e: Exception) {
-                if (BuildConfig.DEBUG) Log.d("Error adding favorites", e.message!!)
-            }
-        }
-    }
-
 
     @SuppressLint("SetTextI18n")
     private fun getDetailMovie(id: Int){

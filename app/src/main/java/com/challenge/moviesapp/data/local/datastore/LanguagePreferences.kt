@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.util.Locale
 
+@Suppress("unused", "RedundantSuppression")
 class LanguagePreferences(private val context: Context) {
     companion object {
         private val Context.counterDataStore by preferencesDataStore(

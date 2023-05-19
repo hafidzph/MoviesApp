@@ -23,7 +23,7 @@ class MovieUpcomingAdapter(private var listNowPlaying: List<ResultUpcoming>): Re
                 tvUserScore.text = "$userScore%"
                 cvFilm.setOnClickListener {
                     val bundle = Bundle()
-                    bundle.putParcelable("itemUpcoming", upcoming)
+                    bundle.putInt("id", upcoming.id)
                     it.findNavController().navigate(R.id.action_homeFragment2_to_detailMoviesFragment, bundle)
                 }
             }

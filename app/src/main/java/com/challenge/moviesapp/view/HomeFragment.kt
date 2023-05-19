@@ -22,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
+@Suppress("unused", "RedundantSuppression")
 class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
     private val homeVM: HomeViewModel by viewModels()
@@ -61,6 +62,7 @@ class HomeFragment : Fragment() {
             topRated.visibility = View.GONE
             upcoming.visibility = View.GONE
         }
+
         homeVM.apply {
             getPopularMovie()
             getNowPlaying()
