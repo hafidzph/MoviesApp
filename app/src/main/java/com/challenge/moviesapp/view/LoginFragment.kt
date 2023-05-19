@@ -13,8 +13,6 @@ import com.challenge.moviesapp.R
 import com.challenge.moviesapp.databinding.FragmentLoginBinding
 import com.challenge.moviesapp.model.user.User
 import com.challenge.moviesapp.viewmodel.LoginViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
