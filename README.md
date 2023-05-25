@@ -3,15 +3,6 @@
 
 This Movies App is made using Kotlin and this application uses the API from the TMDb API, using the MVVM architecture and using Dependency Injection, namely Hilt.
 
-## Authors
-
-- [@hafidzph](https://www.github.com/hafidzph)
-
-
-## Feedback
-
-If you have any feedback, please reach out to us at apiiettrecomen1@gmail.com
-
 
 ## Tech Stack
 
@@ -29,6 +20,14 @@ If you have any feedback, please reach out to us at apiiettrecomen1@gmail.com
 
 
 
+## Authors
+
+- [@hafidzph](https://www.github.com/hafidzph)
+
+
+## Feedback
+
+If you have any feedback, please reach out to me at apiiettrecomen1@gmail.com
 
 
 
