@@ -8,9 +8,9 @@ This Movies App is made using Kotlin and this application uses the API from the 
 
 **Architecture:** MVVM.
 
-**Networking:** Retrofit.
+**Networking:** Retrofit, Gson.
 
-**Networking:** Gson.
+**Testing:** Unit Test.
 
 **Dependency Injection:** Hilt.
 
