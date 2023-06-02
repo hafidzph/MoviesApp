@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DefaultButton" parent="TextAppearance.AppCompat.Widget.Button">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="backgroundTint">@color/blue_all</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
+    <style name="ProfileButton" parent="TextAppearance.AppCompat.Widget.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="backgroundTint">@color/blue_all</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>

@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.challenge.moviesapp.BuildConfig
 import com.challenge.moviesapp.data.local.dao.FavouriteDao
 import com.challenge.moviesapp.data.local.datastore.UserPreferences
 import com.challenge.moviesapp.model.movie.favourite.FavouriteMovie
@@ -16,7 +15,8 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class FavouriteViewModel @Inject constructor(private val userPreferences: UserPreferences, private val favDao: FavouriteDao): ViewModel() {
+class FavouriteViewModel @Inject constructor(private val userPreferences: UserPreferences,
+                                             private val favDao: FavouriteDao): ViewModel() {
     private val _favMovie = MutableLiveData<List<FavouriteMovie>>()
     val favMovie: LiveData<List<FavouriteMovie>> = _favMovie
 
@@ -24,14 +24,7 @@ class FavouriteViewModel @Inject constructor(private val userPreferences: UserPr
         try {
             _favMovie.postValue(favDao.getAllFavMovie(userPreferences.getUserId()!!))
         } catch (e: Exception){
-            if (BuildConfig.DEBUG) Log.d("Error fav", "Error post fav movie")
+            Log.d("Error fav", "Error post fav movie")
         }
     }
-
-//    fun deleteFav(favMovie: FavouriteMovie) = viewModelScope.launch(Dispatchers.IO) {
-//        favDao.delete(favMovie.id)
-//        val currentList = _favMovie.value.orEmpty().toMutableList()
-//        currentList.remove(favMovie)
-//        _favMovie.postValue(currentList)
-//    }
 }

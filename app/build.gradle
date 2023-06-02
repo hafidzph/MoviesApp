@@ -39,6 +39,19 @@ android {
         dataBinding true
     }
 
+    flavorDimensions "movie"
+
+    productFlavors{
+        oldLogo{
+            applicationIdSuffix ".oldLogo"
+            dimension "movie"
+        }
+        newLogo{
+            applicationIdSuffix ".newLogo"
+            dimension "movie"
+        }
+    }
+
     lint{
         disable 'TypographyQuotes'
         enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
@@ -85,11 +98,24 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2'
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    testImplementation "androidx.test:core:1.5.0"
+
+    oldLogoImplementation 'com.google.gms:google-services:4.3.15'
+    newLogoImplementation 'com.google.gms:google-services:4.3.15'
+
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0'
+    testImplementation 'org.mockito:mockito-inline:3.12.4'
+    implementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation "io.mockk:mockk:1.13.1"
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
 }

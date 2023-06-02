@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.challenge.moviesapp.BuildConfig
 import com.challenge.moviesapp.data.local.dao.FavouriteDao
 import com.challenge.moviesapp.data.local.datastore.LanguagePreferences
 import com.challenge.moviesapp.data.local.datastore.UserPreferences
@@ -14,6 +13,7 @@ import com.challenge.moviesapp.model.movie.detail.ResponseMovieDetail
 import com.challenge.moviesapp.model.movie.favourite.FavouriteMovie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -38,15 +38,13 @@ class DetailMoviesViewModel @Inject constructor(private val langPrefs: LanguageP
 
     fun getMovieDetail(id: Int){
         viewModelScope.launch(Dispatchers.IO) {
-            langPrefs.getLanguage().collect {
-                val langCode = if (it == "id") "id-ID" else "en-EN"
-                try {
-                    val response = movieService.getDetailMovie(id, "d4e032a78d32940d67d6b1e0a21d82ca", langCode)
-                    _detailMovie.postValue(response)
-                    _favMovie.postValue(FavouriteMovie(id, response.posterPath, response.title, response.releaseDate, currentDateTime, userPreferences.getUserId()!!))
-                }catch (e: Exception){
-                    if(BuildConfig.DEBUG) Log.d("Error Detail", e.message ?: "Unknown error occurred")
-                }
+            val langCode = if (langPrefs.getLanguage().first() == "id") "id-ID" else "en-EN"
+            try {
+                val response = movieService.getDetailMovie(id, "d4e032a78d32940d67d6b1e0a21d82ca", langCode)
+                _detailMovie.postValue(response)
+                _favMovie.postValue(FavouriteMovie(id, response.posterPath, response.title, response.releaseDate, currentDateTime, userPreferences.getUserId()!!))
+            }catch (e: Exception){
+                Log.d("Error Detail", e.message ?: "Unknown error occurred")
             }
         }
     }

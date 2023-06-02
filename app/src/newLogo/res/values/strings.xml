@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">MoviesApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="masukkan_password">Masukkan Kata Sandi</string>
+    <string name="sign_in">Masuk</string>
+    <string name="masukkan_email">Masukkan Email</string>
+    <string name="sign_up">Daftar</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="daftar_disini"><u>Daftar disini</u></string>
+    <string name="input_username">Masukkan Username</string>
+    <string name="konfirmasi_password">Konfirmasi Kata Sandi</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="login_disini"><u>Masuk disini</u></string>
+    <string name="home">Home</string>
+    <string name="update_profile">UBAH PROFILE</string>
+    <string name="update">Ubah</string>
+    <string name="masukkan_nama_lengkap">Masukkan Nama Lengkap</string>
+    <string name="masukkan_tanggal_lahir">Masukkan Tanggal Lahir</string>
+    <string name="masukkan_alamat">Masukkan Alamat</string>
+    <string name="logout">Keluar</string>
+    <string name="select_date">Pilih Tanggal</string>
+    <string name="pilih_bahasa">Pilih Bahasa</string>
+    <string name="bahasa_indonesia">Bahasa Indonesia</string>
+    <string name="english">English</string>
+    <string name="overview">Ringkasan</string>
+    <string name="delete">DELETE</string>
+    <string-array name="month_names">
+        <item>Januari</item>
+        <item>Februari</item>
+        <item>Maret</item>
+        <item>April</item>
+        <item>Mei</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Agustus</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Desember</item>
+    </string-array>
+    <string name="msg_fav_delete">Movie successfully removed from favorites list</string>
+    <string name="msg_fav_input">Successfully adding movie to favorites list</string>
+    <string name="hello">Hello</string>
+    <string name="msg_login_invalid">Email and Password is not invalid</string>
+    <string name="msg_username_empty">"Username cannot be empty "</string>
+    <string name="msg_email_empty">Email cannot be empty</string>
+    <string name="msg_password_empty">Password cannot be empty</string>
+    <string name="msg_cp_empty">Confirm Password cannot be empty</string>
+    <string name="msg_matchpsw">Passwords do not match</string>
+    <string name="msg_existing">Username or email already registered</string>
+    <string name="msg_success_register">Account successfully registered</string>
+    <string name="msg_email_invalid">Invalid e-mail</string>
+    <string name="msg_field">Field must be filled</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>
